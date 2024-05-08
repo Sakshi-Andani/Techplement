@@ -1,0 +1,29 @@
+import random
+import sys
+
+def passgen(passlen, uppercase=True, lowercase=True, digits=True, spl_char=True):
+    char = ""
+    if uppercase:
+        char += "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    if lowercase:
+        char += "abcdefghijklmnopqrstuvwxyz"
+    if digits:
+        char += "0123456789"
+    if spl_char:
+        char += "#$%&'()*+,-./:;<=>?@[]^_'{|}~"
+    if not char:
+        print("At least one character type must be selected.")
+        return
+
+    password = "".join(random.choice(char) for i in range(passlen))
+    print("Password generated:", password)
+    sys.exit()
+
+if __name__ == "__main__":
+    p_len = input("Password length?: ")
+    uppercase = input("Include uppercase letters? (y/n): ").lower() == 'y'
+    lowercase = input("Include lowercase letters? (y/n): ").lower() == 'y'
+    digits = input("Include digits? (y/n): ").lower() == 'y'
+    spl_char = input("Include special characters? (y/n): ").lower() == 'y'
+
+    passgen(int(p_len), uppercase, lowercase, digits, spl_char)
